@@ -20,6 +20,8 @@
 *.rar
 *.xml
 *.iml
+*.xlsx
+*.csv
 
 out/*
 
