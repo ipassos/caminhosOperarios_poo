@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class commaSeparatedValuesHandler {
+    public static int counterHeader = 0;
 
     public static List<String> readCsv(String filePath, Charset encoding) {
         BufferedReader reader = createBufferedReader(filePath, encoding);
