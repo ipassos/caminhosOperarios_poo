@@ -24,8 +24,6 @@ public class utils {
             url.append(coord[1]).append(",").append(coord[0]).append("/");
         }
 
-        url.deleteCharAt(url.length() - 1);
-
         return url.toString();
     }
     public static String getWhatsInsideParenthesis(String dummyString) {
