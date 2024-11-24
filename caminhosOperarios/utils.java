@@ -7,19 +7,7 @@ import java.util.regex.Pattern;
 
 public class utils {
 
-    public static String[] retrieveWKTLongLat(String wkt) {
-        wkt = wkt.replace("(", "").replace(")", "");
-        String[] partes = wkt.split(" ");
-        String lat = partes[1];
-        String lng = partes[2];
-
-        System.out.println(lat);
-        System.out.println(lng);
-
-        return new String[]{lng.trim(),lat.trim()};
-    }
-
-    public static String getGoogleMapsURLWithLngLat(String wkt) {
+    public static String generateGoogleMapsLocalURL(String wkt) {
         StringBuilder url = new StringBuilder("https://www.google.com/maps?q=");
 
         String[] valoresLatLng = utils.retrieveWKTLongLat(wkt);
@@ -27,10 +15,12 @@ public class utils {
         return(url.append(valoresLatLng[0]).append(",").append(valoresLatLng[1]).toString());
     }
 
-    public static String generateGoogleMapsPolylineURL(List<String[]> coordinates) {
+    public static String generateGoogleMapsRouteURL(String coordinates) {
         StringBuilder url = new StringBuilder("https://www.google.com/maps/dir/");
 
-        for (String[] coord : coordinates) {
+        List<String[]> listCoordinates = retrieveListOfCoordinates(coordinates);
+
+        for (String[] coord : listCoordinates) {
             url.append(coord[1]).append(",").append(coord[0]).append("/");
         }
 
@@ -38,17 +28,28 @@ public class utils {
 
         return url.toString();
     }
+    public static String getWhatsInsideParenthesis(String dummyString) {
+        Matcher m = Pattern.compile("\\((.*?)\\)").matcher(dummyString);
+        String toReturnString= "";
+        while (m.find()) {
+            toReturnString = m.group(1);
+        }
+
+        return(toReturnString);
+    }
+
+    public static String[] retrieveWKTLongLat(String coordinates) {
+        coordinates = getWhatsInsideParenthesis(coordinates);
+        String[] latLng = coordinates.trim().split(" ");
+
+        return new String[]{latLng[1].trim(),latLng[0].trim()};
+    }
 
     public static List<String[]> retrieveListOfCoordinates(String coordinates) {
-
-        Matcher m = Pattern.compile("\\((.*?)\\)").matcher(coordinates);
-        String StrCoordenadas = "";
-        while (m.find()) {
-            StrCoordenadas = m.group(1);
-        }
+        String cleanCoordinates = getWhatsInsideParenthesis(coordinates);
         List<String[]> coordinatesToRoute = new ArrayList<>();
 
-        for (String coord : List.of(StrCoordenadas.split(","))) {
+        for (String coord : List.of(cleanCoordinates.split(","))) {
             String[] latLng = coord.trim().split(" ");
             coordinatesToRoute.add(latLng);
         }
