@@ -2,6 +2,7 @@ package caminhosOperarios;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Projeto {
 
@@ -67,5 +68,45 @@ public class Projeto {
             System.out.println("    " + rota.getNome() + ": " + rota.getRotaCompleta());
         }
         System.out.println();
+    }
+
+    public static Projeto montaProjeto(String projeto) {
+
+        List<String> lines = commaSeparatedValuesHandler.readCsv(constants.getValueFromKey(projeto), constants.ENCONDING);
+        lines.removeFirst();
+
+        HashMap<String, Rota> hashmapRotas = new HashMap<String, Rota>();
+        for (String line : lines) {
+            String[] partes = line.split(";");
+            String localGoogleMapsUrl = utils.generateGoogleMapsLocalURL(partes[1]);
+
+            Local temp_local = new Local(partes[2], localGoogleMapsUrl, partes[3]);
+
+            String currentId = partes[0];
+            int intCurrentId = Integer.parseInt(partes[0]);
+            if (!hashmapRotas.containsKey(currentId)) {
+                System.out.printf("\n    Não tenho o ID: %s e portanto estou adicionando no hashmap\n", partes[0]);
+
+                System.out.print("    Adicionado rota atual no hashmap de rotas completas...");
+                String currentRotaCompleta = utils.generateGoogleMapsRouteURL(partes[5]);
+                Rota currentRota = new Rota(intCurrentId, partes[4], currentRotaCompleta);
+
+                currentRota.adicionarLocal(temp_local);
+
+                System.out.printf("\n    Local de nome %s foi aficionado a rota de ID %s", temp_local.getNome(), currentId);
+                hashmapRotas.put(currentId, currentRota);
+            } else {
+
+                Rota currentRota = hashmapRotas.get(currentId);
+                currentRota.adicionarLocal(temp_local);
+
+                System.out.printf("\n    Local de nome %s foi aficionado a rota de ID %s", temp_local.getNome(), currentId);
+                hashmapRotas.put(currentId, currentRota);
+            }
+        }
+
+        System.out.println("\n------------------------------------------\n");
+
+        return new Projeto("Memórias dos operários", constants.DESCRICAO_MEMORIAS, hashmapRotas);
     }
 }
