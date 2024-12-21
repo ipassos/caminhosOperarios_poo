@@ -9,14 +9,30 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /*
-0: Rota ID
-1: wkt com o valor do ponto específico
-2: nome do local
-3: descrição
-4: nome da rota
-4: rota completa
+Informações do banco de dados
+    0: Rota ID
+    1: wkt com o valor do ponto específico
+    2: nome do local
+    3: descrição
+    4: nome da rota
+    5: rota completa
 
-Na query do google maps temos que passar lng + lat
+TODO
+    Logs da execução do montaProjeto
+    Switch-case para as opções do usuário
+
+Fluxograma do uso:
+        1. Escolhe o projeto
+        2. Monta o projeto
+        3. O usuário pega informações. Adiciona visitas. Etc...
+        4. Usuário sai do projeto
+        5. Usuário entra em outro projeto
+            5.1.O usuário pega informações. Adiciona visitas. Etc...
+            5.2 O usuário sai do projeto
+        6. Usuário termina execução do programa
+
+Observações:
+    Na query do google maps temos que passar lng + lat
 */
 
 public class Main {
