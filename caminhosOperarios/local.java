@@ -1,6 +1,6 @@
 package caminhosOperarios;
 
-public class Local {
+public class local {
 
     private static int id = 0;
     public String nome;
@@ -11,7 +11,7 @@ public class Local {
         System.out.printf("\nDescriçao do local: %s\n", descricao);
     }
 
-    public Local(String nome, String urlCoordenadas, String descricao) {
+    public local(String nome, String urlCoordenadas, String descricao) {
         this.nome = nome;
         this.urlCoordenadas = urlCoordenadas;
         this.descricao = descricao;

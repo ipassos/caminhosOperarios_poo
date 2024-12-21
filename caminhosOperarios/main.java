@@ -1,11 +1,10 @@
 package caminhosOperarios;
 
 import java.util.HashMap;
-import java.util.List;
 
 /*
 Informações do banco de dados
-    0: Rota ID
+    0: rota ID
     1: wkt com o valor do ponto específico
     2: nome do local
     3: descrição
@@ -30,13 +29,13 @@ Observações:
     Na query do google maps temos que passar lng + lat
 */
 
-public class Main {
+public class main {
 
     public static void main(String[] args) {
 
         HashMap<String, String> dadosUsuario = auth.validaUsuario();
 
-        Projeto memorias = Projeto.montaProjeto("Memorias");
+        projeto memorias = projeto.montaProjeto("Memorias");
         memorias.getNomeRotas();
         memorias.getRotasCompleta();
         memorias.getInformacaoLocais();
