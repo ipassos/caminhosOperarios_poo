@@ -12,14 +12,22 @@ public class Projeto {
     // esse hashmap vai ser responsável por mapear o nome da Rota com a Rota em si;
     private HashMap<String, Rota> rotas;
 
-    public void consultaNomeRotas() {
+    public void getInformacaoLocais() {
+        System.out.println("Informação todos os locais para todas as rotas");
         for (String key: rotas.keySet()) {
             Rota rota = rotas.get(key);
-            System.out.printf("%s: %s\n", key, rota.getNome());
+            ArrayList<Local> locais = rota.getLocal();
+            System.out.println("    Rota: " + rota.getNome());
+            for (Local local : locais) {
+                System.out.println("        Nome: " + local.getNome());
+                System.out.println("        Descrição: " + local.getDescricao());
+                System.out.println("        ------------ ");
+            }
         }
+        System.out.println();
     }
 
-    public void getInformacaoLocais(String nomeRota) {
+    public void getInformacaoLocal(String nomeRota) {
         Rota rota = rotas.get(nomeRota);
         System.out.println("Informação de locais para a rota: " + rota.getNome());
         ArrayList<Local> locais = rota.getLocal();
@@ -28,17 +36,20 @@ public class Projeto {
             System.out.println("    Descrição: " + local.getDescricao());
             System.out.println("    ------------ ");
         }
+        System.out.println();
     }
 
     public void getNomeRotas() {
         System.out.println("Nome das rotas");
         for (String key: rotas.keySet()) {
             Rota rota = rotas.get(key);
-            System.out.println("    " + rota.getNome());
+            System.out.println("    ID: " + rota.getId() + "- " + rota.getNome());
         }
+
+        System.out.println();
     }
 
-    public void verDescricao() {
+    public void getDescricao() {
         System.out.printf("\nDescriçao do projeto: %s\n", descricao);
     }
 
@@ -47,5 +58,14 @@ public class Projeto {
         this.descricao = descricao;
         this.rotas = rotas;
         id++;
+    }
+
+    public void getRotasCompleta() {
+        System.out.println("Rotas completas");
+        for (String key: rotas.keySet()) {
+            Rota rota = rotas.get(key);
+            System.out.println("    " + rota.getNome() + ": " + rota.getRotaCompleta());
+        }
+        System.out.println();
     }
 }

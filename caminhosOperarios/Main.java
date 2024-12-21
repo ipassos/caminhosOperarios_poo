@@ -26,11 +26,12 @@ public class Main {
         Charset encoding = StandardCharsets.UTF_8;
 
         List<String> lines = commaSeparatedValuesHandler.readCsv(filePath_projeto_memorias, encoding);
-        String header = lines.getFirst();
         lines.removeFirst();
 
         Projeto memorias = montaProjeto(lines);
         memorias.getNomeRotas();
+        memorias.getRotasCompleta();
+        memorias.getInformacaoLocais();
     }
 
     public static Projeto montaProjeto(List<String> lines) {
@@ -43,12 +44,13 @@ public class Main {
             Local temp_local = new Local(partes[2], localGoogleMapsUrl, partes[3]);
 
             String currentId = partes[0];
+            int intCurrentId = Integer.parseInt(partes[0]);
             if (!hashmapRotas.containsKey(currentId)) {
                 System.out.printf("\n    Não tenho o ID: %s e portanto estou adicionando no hashmap\n", partes[0]);
 
                 System.out.print("    Adicionado rota atual no hashmap de rotas completas...");
                 String currentRotaCompleta = utils.generateGoogleMapsRouteURL(partes[5]);
-                Rota currentRota = new Rota(partes[4], currentRotaCompleta);
+                Rota currentRota = new Rota(intCurrentId, partes[4], currentRotaCompleta);
 
                 currentRota.adicionarLocal(temp_local);
 

@@ -3,11 +3,12 @@ package caminhosOperarios;
 import java.util.ArrayList;
 
 public class Rota {
-    private static int id = 0;
-    public String nome;
+    private int id;
+    private String nome;
     private String descricao;
     private ArrayList<Local> local;
-    private static String rotaCompleta;
+    private String rotaCompleta;
+    private static int visitas = 0;
 
     public void verDescricao() {
         System.out.printf("\nDescriçao da rota: %s\n", descricao);
@@ -38,18 +39,22 @@ public class Rota {
         return nome;
     }
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 
-    public static void getRotaCompleta() {
-         System.out.println(rotaCompleta);
+    public String getRotaCompleta() {
+         return rotaCompleta;
     }
 
-    public Rota(String nome, String rotaCompleta) {
+    public void registerVisita() {
+        visitas++;
+    }
+
+    public Rota(int id, String nome, String rotaCompleta) {
+        this.id = id;
         this.nome = nome;
-        rotaCompleta = rotaCompleta;
+        this.rotaCompleta = rotaCompleta;
         this.local = new ArrayList<>();
-        id++;
     }
 }
