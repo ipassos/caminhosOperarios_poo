@@ -2,11 +2,39 @@ package caminhosOperarios;
 
 import java.util.ArrayList;
 
+/**
+ * A base class representing a user in the system.
+ *
+ * Attributes:
+ *    username: String
+ *        The username of the user.
+ *    password: String
+ *        The password of the user.
+ *    role: String
+ *        The role of the user (e.g., "usuário", "historiador", "curador").
+ *    id: int
+ *        The unique identifier for the user.
+ *    rotasVisitadas: ArrayList<rota>
+ *        A list of routes visited by the user.
+ *    locaisVisitados: ArrayList<local>
+ *        A list of locations visited by the user.
+ *
+ * Methods:
+ *    visitarRota: ArrayList<local>
+ *        Adds a route to the list of visited routes and returns the locations of the route.
+ *    verInfoRota: String
+ *        Returns information about a selected route, including its name, description, and locations.
+ *    verInfoLocal: String
+ *        Returns detailed information about a selected location and its associated route.
+ *    visitarLocal: String
+ *        Adds a location to the list of visited locations if not already visited and returns detailed information about it.
+ */
+
 class Usuario {
-        private String username;
-        private String password;
-        private String role; // Escopo: usuário, historiador, curador
-        private int id;
+        private final String username;
+        private final String password;
+        private final String role; // Escopo: usuário, historiador, curador
+        private final int id;
         private ArrayList<rota> rotasVisitadas; // Lista de rotas visitadas pelo usuário
         private ArrayList<local> locaisVisitados; // Lista de locais visitados pelo usuário
 
@@ -86,6 +114,39 @@ class Usuario {
             return "Local não encontrado em nenhuma rota.";
         }
 }
+
+/**
+ * A class representing a historian user in the system.
+ * Inherits from Usuario and has additional capabilities for creating and editing routes, locations, and projects.
+ *
+ * Additional Attributes:
+ *    rotasEditadas: ArrayList<rota>
+ *        A list of routes edited by the historian.
+ *    rotasCriadas: ArrayList<rota>
+ *        A list of routes created by the historian.
+ *    locaisEditados: ArrayList<local>
+ *        A list of locations edited by the historian.
+ *    locaisCriados: ArrayList<local>
+ *        A list of locations created by the historian.
+ *    projetosCriados: ArrayList<String>
+ *        A list of projects created by the historian.
+ *    projetosEditados: ArrayList<String>
+ *        A list of projects edited by the historian.
+ *
+ * Additional Methods:
+ *    criarRota: void
+ *        Creates a new route and adds it to the list of created routes.
+ *    editarRota: void
+ *        Edits an existing route and adds it to the list of edited routes.
+ *    criarLocal: void
+ *        Creates a new location and adds it to the list of created locations.
+ *    editarLocal: void
+ *        Edits an existing location and adds it to the list of edited locations.
+ *    criarProjeto: void
+ *        Creates a new project and adds it to the list of created projects.
+ *    editarProjeto: void
+ *        Edits an existing project and updates the list of created projects.
+ */
 
 class Historiador extends Usuario {
 
@@ -170,6 +231,23 @@ class Historiador extends Usuario {
         projetosCriados.add(nomeProjetoNovo);
     }
 }
+
+/**
+ * A class representing a curator user in the system.
+ * Inherits from Usuario and has additional capabilities for editing routes and locations.
+ *
+ * Additional Attributes:
+ *    rotasEditadas: ArrayList<rota>
+ *        A list of routes edited by the curator.
+ *    locaisEditados: ArrayList<local>
+ *        A list of locations edited by the curator.
+ *
+ * Methods:
+ *    editarRota: void
+ *        Edits an existing route and adds it to the list of edited routes.
+ *    editarLocal: void
+ *        Edits an existing location and adds it to the list of edited locations.
+ */
 
 class Curador extends Usuario {
 
